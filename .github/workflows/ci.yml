@@ -32,15 +32,10 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:latest, ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:v.0-${{ github.run_attempt }}
       - 
-        name: Update Helm value in Config Repo
-        run: |
-          git clone https://github.com/minhman1504/Udacity-Capstone-Project-Config
-          cd Udacity-Capstone-Project-Config/
-          ls -al
-          echo "image: ${{ secrets.DOCKERHUB_USERNAME }}" > values.yaml
-          echo "tag: ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:v.0-${{ github.run_attempt }}" >> values.yaml
-          
-          git commit -m "update values.yaml"
-          git push -u origin master
-          
-          echo "Updata success !"
+        name: Update Image Version in the related HelmChart values.yaml
+        uses: fjogeleit/yaml-update-action@main
+        with:
+          valueFile: './values.yaml'
+          repository: 'https://github.com/minhman1504/Udacity-Capstone-Project-Config'
+          tag: v.0-${{ github.run_attempt }}
+          message: 'Update tag to v.0-${{ github.run_attempt }}' 

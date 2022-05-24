@@ -30,4 +30,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:latest ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:v.0-${{ github.run_id }}-${{ github.run_attempt }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:latest, ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:v.0-${{ github.run_attempt }}

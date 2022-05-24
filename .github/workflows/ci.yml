@@ -31,11 +31,3 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:latest, ${{ secrets.DOCKERHUB_USERNAME }}/example-nginx:v.0-${{ github.run_attempt }}
-      - 
-        name: Update Image Version in the related HelmChart values.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          valueFile: './values.yaml'
-          repository: 'https://github.com/minhman1504/Udacity-Capstone-Project-Config'
-          value: v.0-${{ github.run_attempt }}
-          message: 'Update tag to v.0-${{ github.run_attempt }}' 
